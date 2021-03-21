@@ -127,7 +127,7 @@ class T1DashboardState extends State<T1Dashboard> {
     int startTime = new DateTime.now().millisecondsSinceEpoch;
     var recognitions = await Tflite.detectObjectOnImage(
       path: image.path,
-      numResultsPerClass: 1,
+      numResultsPerClass: 5,
     );
     // var imageBytes = (await rootBundle.load(image.path)).buffer;
     // img.Image oriImage = img.decodeJpg(imageBytes.asUint8List());
@@ -142,6 +142,13 @@ class T1DashboardState extends State<T1Dashboard> {
     int endTime = new DateTime.now().millisecondsSinceEpoch;
     print("Inference took ${endTime - startTime}ms");
     print(recognitions);
+    Future.delayed(const Duration(milliseconds: 500), () {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CustomDialog(
+            _recognitions[0], confidenceF, _recognitions[1], confidenceF2),
+      );
+    });
   }
 
   @override
@@ -309,24 +316,24 @@ class T1DashboardState extends State<T1Dashboard> {
                       labeler.close();*/
 
                       // await predictImage();
-                      if (showLabels = true) {
-                        Future.delayed(const Duration(milliseconds: 500), () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) => CustomDialog(
-                                disease, confidenceF, disease2, confidenceF2),
-                          );
-                        });
-                      } else {
-                        var lowConfidence = "Confidence below threshold";
-                        Future.delayed(const Duration(milliseconds: 500), () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) => CustomDialog(
-                                lowConfidence, "", lowConfidence, ""),
-                          );
-                        });
-                      }
+//                      if (showLabels = true) {
+//                        Future.delayed(const Duration(milliseconds: 500), () {
+//                          showDialog(
+//                            context: context,
+//                            builder: (BuildContext context) => CustomDialog(
+//                                disease, confidenceF, disease2, confidenceF2),
+//                          );
+//                        });
+//                      } else {
+//                        var lowConfidence = "Confidence below threshold";
+//                        Future.delayed(const Duration(milliseconds: 500), () {
+//                          showDialog(
+//                            context: context,
+//                            builder: (BuildContext context) => CustomDialog(
+//                                lowConfidence, "", lowConfidence, ""),
+//                          );
+//                        });
+//                      }
                     },
                     child: Icon(
                       Icons.adjust,
