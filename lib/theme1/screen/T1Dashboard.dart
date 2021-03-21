@@ -29,7 +29,7 @@ class T1DashboardState extends State<T1Dashboard> {
   var isSelected = 1;
   var width;
   var height;
-  File pickedImage;
+  PickedFile pickedImage;
   var disease = '';
   var confidenceF = '';
   var disease2 = '';
@@ -69,7 +69,7 @@ class T1DashboardState extends State<T1Dashboard> {
 
   Future pickImage() async {
     showLabels = true;
-    var awaitImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+    var awaitImage = await ImagePicker().getImage(source: ImageSource.gallery);
 
     setState(() {
       pickedImage = awaitImage;
@@ -79,7 +79,7 @@ class T1DashboardState extends State<T1Dashboard> {
 
   Future pickImageEmpty() async {
     showLabels = false;
-    var awaitImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+    var awaitImage = await ImagePicker().getImage(source: ImageSource.gallery);
 
     setState(() {
       pickedImage = awaitImage;
@@ -89,7 +89,7 @@ class T1DashboardState extends State<T1Dashboard> {
 
   Future takeImage() async {
     showLabels = true;
-    var awaitImage = await ImagePicker.pickImage(source: ImageSource.camera);
+    var awaitImage = await ImagePicker().getImage(source: ImageSource.camera);
 
     setState(() {
       pickedImage = awaitImage;
@@ -123,7 +123,7 @@ class T1DashboardState extends State<T1Dashboard> {
     });
   }
 
-  Future ssdMobileNet(File image) async {
+  Future ssdMobileNet(PickedFile image) async {
     int startTime = new DateTime.now().millisecondsSinceEpoch;
     var recognitions = await Tflite.detectObjectOnImage(
       path: image.path,

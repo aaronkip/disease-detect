@@ -33,7 +33,7 @@ dependencies:
   image_picker: ^0.6.7+12
   mobx: ^1.2.1+2
   flutter_mobx: ^1.1.0+2
-  tflite: ^1.0.4
+  tflite: ^1.1.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -60,8 +60,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - models/dict.txt
-    - models/model.tflite
+    - assets/models/dict.txt
+    - assets/models/model.tflite
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
