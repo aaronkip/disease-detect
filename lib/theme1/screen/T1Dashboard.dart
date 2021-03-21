@@ -120,6 +120,14 @@ class T1DashboardState extends State<T1Dashboard> {
         disease = "${re["detectedClass"]}";
         confidenceF = "${(re["confidenceInClass"] * 100).toStringAsFixed(0)}%";
       }).toList();
+      print(recognitions);
+      Future.delayed(const Duration(milliseconds: 500), () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => CustomDialog(
+              _recognitions[0], confidenceF, _recognitions[1], confidenceF2),
+        );
+      });
     });
   }
 
